@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Awareness Daily Routine</title>
+    <style>
+        body {
+            /* font-family: Arial, sans-serif; */
+            /*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600;700&display=swap");
+            background: linear-gradient(93.12deg, hsl(184, 100%, 50%), hsl(205.45, 67.35%, 9.61%));
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input, .input-group select {
+            width: calc(50% - 10px);
+            padding: 8px;
+            box-sizing: border-box;
+            margin-right: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Self-Awareness Daily Routine Planner</h1>
+
+    <div class="input-group">
+        <label for="day">Day of the Week</label>
+        <select id="day">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label for="task">Task</label>
+        <input type="text" id="task" placeholder="Enter your task">
+    </div>
+
+    <div class="input-group">
+        <label for="time">Time (a.m./p.m.)</label>
+        <input type="text" id="time" placeholder="Enter time (e.g., 8:00 a.m.)">
+    </div>
+
+    <div class="input-group">
+        <label for="alarm">Alarm (a.m./p.m.)</label>
+        <input type="text" id="alarm" placeholder="Enter alarm time (e.g., 7:45 a.m.)">
+    </div>
+
+    <button class="btn" onclick="addTask()">Add Task</button>
+
+    <table id="routine-table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Task</th>
+                <th>Time</th>
+                <th>Alarm</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Tasks will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        function addTask() {
+            const day = document.getElementById('day').value;
+            const task = document.getElementById('task').value;
+            const time = document.getElementById('time').value;
+            const alarm = document.getElementById('alarm').value;
+
+            if (task && time && alarm) {
+                const table = document.getElementById('routine-table').getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
+
+                const dayCell = newRow.insertCell(0);
+                const taskCell = newRow.insertCell(1);
+                const timeCell = newRow.insertCell(2);
+                const alarmCell = newRow.insertCell(3);
+
+                dayCell.textContent = day;
+                taskCell.textContent = task;
+                timeCell.textContent = time;
+                alarmCell.textContent = alarm;
+
+                // Clear the input fields
+                document.getElementById('task').value = '';
+                document.getElementById('time').value = '';
+                document.getElementById('alarm').value = '';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        // Automatically update date and month in the table header
+        document.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const date = now.getDate();
+            const month = now.toLocaleString('default', { month: 'long' });
+
+            const header = document.createElement('h2');
+            header.textContent = `Date: ${date}, Month: ${month}`;
+            document.body.insertBefore(header, document.body.firstChild);
+        });
+    </script>
+</body>
+</html>
